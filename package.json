@@ -9,7 +9,8 @@
     "build": "run-s clean build:html build:css",
     "build:html": "eleventy",
     "build:css": "vite build",
-    "clean": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\""
+    "clean": "node -e \"fs.rmSync('dist', { recursive: true, force: true })\"",
+    "start": "vite preview"
   },
   "keywords": [],
   "author": "Ruslan Mirasov",
