@@ -2330,6 +2330,35 @@ body.no-scroll {
     width: 362px;
     height: 362px;
     cursor: pointer;
+    &:hover{
+        .recipe-video{
+            opacity: 1;
+        }
+    }
+}
+
+.recipe-video-poster{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    left:0px;
+    top:0px;
+    object-fit: cover;
+    z-index: 4;
+}
+
+.recipe-video{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height:100%;
+    left:0px;
+    top:0px;
+    object-fit: cover;
+    z-index: 5;
+    transition:opacity 0.3s;
+    opacity: 0;
 }
 
 .recipe-static {

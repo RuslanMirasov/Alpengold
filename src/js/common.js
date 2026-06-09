@@ -158,6 +158,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        slider_recipes.find('.recipe-static').each(function() {
+            const url = $(this).data('recipe');
+            if (url) { (new Image()).src = 'img/recipes/' + url + '.gif'; }
+        });
+
+        if(window.innerWidth > 767) {
+            document.querySelectorAll('.recipe-slide-img').forEach(function(el) {
+                const video = el.querySelector('.recipe-video');
+                if (!video) return;
+                el.addEventListener('mouseenter', function() { video.currentTime = 0; video.play(); });
+                el.addEventListener('mouseleave', function() { video.pause(); });
+            });
+        }
+
         if($(window).innerWidth() < 768) {
             let elem = slider_recipes.find('.owl-item.active .recipe-static');
             let url = elem.data('recipe');
@@ -177,6 +191,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     dataLayer.push({'event': url});
                 }, 100)
+            });
+
+            slider_recipes.on('changed.owl.carousel', function(event) {
+                slider_recipes.find('.recipe-video').each(function() {
+                    this.pause();
+                    this.style.opacity = '';
+                });
+                let activeVideo = slider_recipes.find('.owl-item').eq(event.item.index).find('.recipe-video')[0];
+                if (activeVideo) {
+                    activeVideo.style.opacity = '1';
+                    activeVideo.currentTime = 0;
+                    activeVideo.play();
+                }
+            });
+
+            slider_recipes.find('.recipe-slide-img').on('click', function() {
+                const video = this.querySelector('.recipe-video');
+                if (!video) return;
+                video.style.opacity = '1';
+                video.currentTime = 0;
+                video.play();
             });
         }
     }
